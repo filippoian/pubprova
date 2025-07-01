@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - PUB MÉDOC</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+    :root {
+      --background-dark: #121212;
+      --primary-orange: #e46f2c;
+      --primary-orange-glow: rgba(228, 111, 44, 0.4);
+      --text-light: #f5f5f5;
+      --text-secondary: #b0b0b0;
+      --card-bg: #1a1a1a;
+      --border-color: #2c2c2c;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+    }
+
+    .navbar {
+      background-color: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-links {
+      list-style: none; margin: 0 auto; padding: 0;
+      display: flex; flex-wrap: wrap; justify-content: center; max-width: 1200px;
+    }
+    .nav-links a {
+      position: relative; display: block; padding: 1.1em 1.2em;
+      text-decoration: none; color: var(--text-light);
+      font-family: 'Oswald', sans-serif; text-transform: uppercase;
+      letter-spacing: 1.5px; font-size: 0.9em; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--primary-orange); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px; background-color: var(--primary-orange);
+      transform: scaleX(0); transform-origin: center; transition: transform 0.4s ease;
+    }
+    .nav-links a:hover::after { transform: scaleX(0.8); }
+
+    .hero {
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: center; min-height: 60vh; text-align: center; padding: 2em;
+      background: linear-gradient(180deg, rgba(18,18,18,0.4) 0%, #121212 100%), radial-gradient(circle at 50% 30%, #2a2a2a 0%, #121212 80%);
+    }
+    .logo-img { max-width: 350px; height: auto; }
+    .hero .subtitle {
+      font-family: 'Oswald', sans-serif; font-size: 1.4em; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 3px; margin-top: 1em;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 2em 20px; }
+    .category-accordion {
+      margin-bottom: 2em;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .category-accordion.is-visible { opacity: 1; transform: translateY(0); }
+    .category-title {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color); border-radius: 8px;
+      font-family: 'Oswald', sans-serif; font-size: 2.2em;
+      color: var(--primary-orange); padding: 0.7em 2em;
+      text-transform: uppercase; cursor: pointer; position: relative;
+      user-select: none; transition: background-color 0.3s;
+    }
+    .category-title:hover { background-color: #222; }
+    .category-title::after {
+      content: '+'; font-size: 1.5em; position: absolute; right: 25px; top: 50%;
+      transform: translateY(-50%); transition: transform 0.4s ease;
+    }
+    .category-title.active::after { transform: translateY(-50%) rotate(45deg); }
+    .menu-content-wrapper {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.8s ease-in-out, padding-top 0.5s ease-in-out;
+    }
+
+    /* --- Menu Grid & Items --- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1em; padding-top: 1.5em;
+    }
+    .menu-item {
+      background-color: var(--card-bg); padding: 1.5em;
+      border-radius: 8px; border: 1px solid var(--border-color);
+      display: flex; flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .menu-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-orange-glow);
+    }
+    .menu-item.is-clickable { cursor: pointer; }
+    .item-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+    .item-name {
+      font-family: 'Oswald', sans-serif; font-size: 1.4em;
+      font-weight: 700; color: var(--text-light); text-transform: uppercase;
+    }
+    .item-price {
+      font-family: 'Oswald', sans-serif; font-size: 1.4em;
+      font-weight: 400; color: var(--primary-orange); white-space: nowrap;
+    }
+    .item-description {
+      font-size: 0.9em; color: var(--text-secondary); font-weight: 300;
+      margin-top: 0.5em; line-height: 1.6;
+    }
+
+    .modal {
+      display: none; position: fixed; z-index: 2000;
+      left: 0; top: 0; width: 100%; height: 100%;
+      overflow: auto; background-color: rgba(0,0,0,0.8);
+      align-items: center; justify-content: center;
+    }
+    .modal-content {
+      background-color: var(--card-bg); margin: auto; padding: 2em;
+      border: 1px solid var(--border-color); border-radius: 8px;
+      width: 90%; max-width: 500px; position: relative;
+      animation: fadeIn 0.5s;
+    }
+    .modal-close {
+      color: #aaa; position: absolute; top: 10px; right: 25px;
+      font-size: 28px; font-weight: bold; cursor: pointer;
+    }
+    .modal-close:hover, .modal-close:focus { color: var(--primary-orange); }
+    .modal-img { width: 100%; height: auto; border-radius: 6px; margin-bottom: 1em; }
+    @keyframes fadeIn { from {opacity: 0; transform: scale(0.95);} to {opacity: 1; transform: scale(1);} }
+
+    /* --- Footer & Coperto --- */
+    .coperto-section { text-align: center; margin-top: 4em; }
+    .coperto-text {
+      display: inline-block;
+      padding: 0.5em 1.5em;
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      border-radius: 6px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1em;
+      color: var(--text-secondary);
+    }
+    footer {
+      text-align: center; padding: 2.5em 2em 3em 2em; background-color: #0c0c0c;
+      margin-top: 1.5em; border-top: 1px solid var(--border-color);
+    }
+    .footer-title {
+      font-family: 'Oswald', sans-serif; font-size: 1.8em;
+      color: var(--primary-orange); text-transform: uppercase; margin: 0 0 1em 0;
+    }
+    .contact-info p { color: var(--text-secondary); line-height: 1.7; margin: 0.3em 0; font-size: 0.9em; }
+
+    @media (max-width: 768px) {
+      .hero { min-height: 50vh; }
+      .logo-img { max-width: 200px; }
+      .hero .subtitle {font-size: 1.1em;}
+      .category-title { font-size: 1.8em; }
+      .nav-links a { font-size: 0.8em; padding: 1em 0.5em; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <ul class="nav-links">
+    <li><a href="#stuzzicheria">Stuzzicheria</a></li>
+    <li><a href="#panini">Panini</a></li>
+    <li><a href="#pinse">Pinse</a></li>
+    <li><a href="#specialita">Specialità</a></li>
+    <li><a href="#dolci">Dolci</a></li>
+    <li><a href="#birre">Birre & Bar</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <img src="logo.png" alt="Logo PUB MÉDOC Railway Pub" class="logo-img">
+  <p class="subtitle">Birreria • Pinseria • Paninoteca</p>
+</header>
+
+<main class="container">
+
+  <div id="stuzzicheria" class="category-accordion">
+    <h2 class="category-title">Stuzzicheria</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Patate Fritte</h3><span class="item-price">€5</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Patate Fritte Cheddar & Bacon</h3><span class="item-price">€7</span></div><p class="item-description">Patate fritte con salsa cheddar e bacon croccante</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Olive Ascolane</h3><span class="item-price">€8</span></div><p class="item-description">8 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Anelli di Cipolla</h3><span class="item-price">€5</span></div><p class="item-description">8 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Bocconcini di Pulled Pork</h3><span class="item-price">€7</span></div><p class="item-description">Bocconcini di Pulled Pork serviti con salsa bbq 6 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Bocconcini di Pollo</h3><span class="item-price">€5</span></div><p class="item-description">8 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Jalapeños</h3><span class="item-price">€7</span></div><p class="item-description">6 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Zucchine Fritte</h3><span class="item-price">€6</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Fritto Misto</h3><span class="item-price">€8</span></div><p class="item-description">Patate fritte, 2 pz. olive ascolane, 2 pz. bocconcini di pollo, 2 pz. anelli di cipolla, 2 pz. jalapeños</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panini" class="category-accordion">
+    <h2 class="category-title">Panini</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">90 Min</h3><span class="item-price">€10</span></div><p class="item-description">Hamburger di Scottona 200g, lattuga, pomodoro, cheddar, bacon</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">L'Alba</h3><span class="item-price">€12,5</span></div><p class="item-description">Hamburger di Scottona 200g, carbo crema, pecorino grigliato, guanciale croccante</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">1984</h3><span class="item-price">€11</span></div><p class="item-description">Pulled Pork, coleslaw, salsa bbq</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Daytona</h3><span class="item-price">€9</span></div><p class="item-description">Burger di pollo croccante, lattuga, pomodoro, salsa all'erbette</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">La Chiave</h3><span class="item-price">€13</span></div><p class="item-description">Pastrami, lattuga, burrata, cipolla rossa caramellata, salsa tartara</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Flop</h3><span class="item-price">€10</span></div><p class="item-description">Burger vegetale, lattuga, pomodoro, cheddar</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Marla</h3><span class="item-price">€11</span></div><p class="item-description">Hamburger di Scottona 200g, mortadella grigliata, burrata, pesto di pistacchio</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Tiè</h3><span class="item-price">€9</span></div><p class="item-description">Würstel, cipolla crispy, bacon, cheddar</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pinse" class="category-accordion">
+    <h2 class="category-title">Pinse Rosse</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Lunedì</h3><span class="item-price">€10</span></div><p class="item-description">Pomodoro, bufala, basilico</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Giuda</h3><span class="item-price">€9</span></div><p class="item-description">Pomodoro, mozzarella, verdure grigliate miste</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">La Prima Volta</h3><span class="item-price">€10</span></div><p class="item-description">Pomodoro, stracciatella, pomodorini gialli confit</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Kumitè</h3><span class="item-price">€9</span></div><p class="item-description">Pomodoro, mozzarella, mais, prosciutto cotto</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Machete</h3><span class="item-price">€12</span></div><p class="item-description">Pomodoro, mozzarella, salame piccante, salsiccia, pecorino grattugiato</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hellvisback</h3><span class="item-price">€12</span></div><p class="item-description">Pomodoro, mozarella, salsiccia, porcini</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-accordion">
+    <h2 class="category-title">Pinse Bianche</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">S.A.L.M.O</h3><span class="item-price">€14</span></div><p class="item-description">Stracciatella, mortadella, pesto di pistacchio, tartufo grattugiato</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Titi</h3><span class="item-price">€9</span></div><p class="item-description">Mozzarella, pomodorini gialli confit, mais</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Mauri</h3><span class="item-price">€14</span></div><p class="item-description">Pastrami, stracciatella, pomodorini gialli confit</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Perdonami</h3><span class="item-price">€9,5</span></div><p class="item-description">Mozzarella, tonno, cipolla rossa caramellata</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Russell Crowe</h3><span class="item-price">€10</span></div><p class="item-description">Mozzarella, salsiccia, friarielli</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Miracolo</h3><span class="item-price">€13</span></div><p class="item-description">Rucola, pomodorini, prosciutto crudo, scaglie di Grana, glassa di aceto balsamico</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Respira</h3><span class="item-price">€12</span></div><p class="item-description">Mozzarella, crema di pecorino, guanciale a crudo, carbo-crema</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="specialita" class="category-accordion">
+    <h2 class="category-title">Specialità della Casa</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Insalatona Yoko-Ono</h3><span class="item-price">€13</span></div><p class="item-description">Pollo fritto, lattuga, pomodorini, mais, mozzarella, crostini di pane</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Insalatona Cabriolet</h3><span class="item-price">€13</span></div><p class="item-description">Tonno, lattuga, pomodorini, mais, scaglie di grana, crostini di pane</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Cotoletta con Patate Fritte</h3><span class="item-price">€10</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hamburger di Scottona (200g) con Patate Fritte</h3><span class="item-price">€10</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Tagliata di Scottona</h3><span class="item-price">€18</span></div><p class="item-description">Sale nero e rosmarino</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Tagliata di Scottona</h3><span class="item-price">€18</span></div><p class="item-description">Rucola e grana</p></div>
+    </div>
+  </div>
+
+  <div id="dolci" class="category-accordion">
+    <h2 class="category-title">Dolci</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Pinsa Dolce</h3><span class="item-price">€10</span></div><p class="item-description">Nutella, cioccolato bianco, granella di nocciole</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Dolce della Casa</h3><span class="item-price">€5</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Birramisù</h3><span class="item-price">€5</span></div><p class="item-description">Rivisitazione del classico tiramisù, arricchito da una delicata nota di birra</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="birre" class="category-accordion">
+    <h2 class="category-title">Birre & Bar</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hirter Marzen 5,0%</h3><span class="item-price">€4 / €6</span></div><p class="item-description">0.3cl / 0.5cl - Lager, Austria</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hoegaarden 4,8%</h3><span class="item-price">€4 / €6</span></div><p class="item-description">0.25cl / 0.5cl - Blanche, Belgio</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Mezzopasso IPA 5,9%</h3><span class="item-price">€4,5 / €6,5</span></div><p class="item-description">0.25cl / 0.4cl - IPA, Italia</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Leffe Rossa 6,6%</h3><span class="item-price">€4,5 / €6,5</span></div><p class="item-description">0.25cl / 0.4cl - Rossa, Belgio</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Pepsi alla Spina</h3><span class="item-price">€3 / €5</span></div><p class="item-description">0.3cl / 0.5cl</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Bevande in Vetro 0,33cl</h3><span class="item-price">€3</span></div><p class="item-description">Pepsi / Pepsi Max / 7 Up / Lipton Iced Tea / Oransoda</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Acqua</h3><span class="item-price">€1 / €2</span></div><p class="item-description">0,5L / 1L</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Vino</h3><span class="item-price">SQ</span></div><p class="item-description">Al calice o in bottiglia</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Amari</h3><span class="item-price">€3</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Caffè</h3><span class="item-price">€1,5</span></div></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="coperto-section">
+  <p class="coperto-text">COPERTO €2</p>
+</div>
+
+<footer id="contatti">
+  <h2 class="footer-title">Vieni a trovarci</h2>
+  <div class="contact-info">
+    <p><strong>Indirizzo:</strong> Via Monfalcone, 10 - San Benedetto del Tronto (AP)</p>
+    <p><strong>Orari:</strong> Lun-Dom: 18:00 - 02:00 </p>
+    <p>Seguici sui Social: <strong>@pub_medoc</strong></p>
+  </div>
+</footer>
+
+<div id="itemModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <img src="https://i.imgur.com/gK9fg2p.jpeg" alt="Pinsa Russell Crowe" class="modal-img">
+    <div class="item-header">
+      <h3 class="item-name">Russell Crowe</h3>
+      <span class="item-price">€10</span>
+    </div>
+    <p class="item-description">La nostra celebre pinsa con una base di mozzarella fior di latte, arricchita con salsiccia artigianale e friarielli saltati in padella con aglio e peperoncino.</p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    const sections = document.querySelectorAll('.category-accordion');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    sections.forEach(section => { observer.observe(section); });
+
+
+    const accordionTitles = document.querySelectorAll('.category-title');
+    accordionTitles.forEach(title => {
+      title.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          content.style.paddingTop = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.paddingTop = "1.5em";
+        }
+      });
+    });
+
+    const modal = document.getElementById("itemModal");
+    const trigger = document.getElementById("russellCroweTrigger");
+    const closeBtn = document.querySelector(".modal-close");
+
+    if (modal && trigger && closeBtn) {
+      trigger.onclick = () => { modal.style.display = "flex"; }
+      closeBtn.onclick = () => { modal.style.display = "none"; }
+      window.onclick = (event) => {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
