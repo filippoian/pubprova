@@ -61,6 +61,79 @@
       text-transform: uppercase; letter-spacing: 3px; margin-top: 1em;
     }
 
+    /* --- Sezione Prenota (Adesso usa gli stili dell'Accordion) --- */
+    .reservation-wrapper {
+      max-width: 1200px; margin: 0 auto; padding: 2em 20px;
+    }
+    #prenota {
+      background-color: var(--background-dark); /* Reset dello sfondo per l'accordion */
+      margin-bottom: 2em;
+      opacity: 1; /* Deve essere sempre visibile per la prenotazione */
+      transform: translateY(0);
+      transition: none; /* Rimuoviamo l'animazione all'ingresso se è la prima sezione */
+    }
+
+    .reservation-title {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color); border-radius: 8px;
+      font-family: 'Oswald', sans-serif; font-size: 2.2em;
+      color: var(--primary-orange); padding: 0.7em 2em;
+      text-transform: uppercase; cursor: pointer; position: relative;
+      user-select: none; transition: background-color 0.3s;
+    }
+    .reservation-title:hover { background-color: #222; }
+    .reservation-title::after {
+      content: '+'; font-size: 1.5em; position: absolute; right: 25px; top: 50%;
+      transform: translateY(-50%); transition: transform 0.4s ease;
+    }
+    .reservation-title.active::after { transform: translateY(-50%) rotate(45deg); }
+
+    .reservation-content-wrapper {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.8s ease-in-out;
+      padding: 0 1em; /* Spazi laterali per il form */
+    }
+
+    .reservation-container {
+      max-width: 600px; margin: 2em auto; /* Centra il form all'interno del wrapper */
+      text-align: center;
+    }
+
+    .reservation-form {
+      display: flex; flex-direction: column; gap: 1.5em;
+      padding: 1.5em;
+      background-color: var(--card-bg); /* Sfondo per il form */
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .reservation-form input,
+    .reservation-form select {
+      padding: 1em; border: 1px solid var(--border-color);
+      border-radius: 4px; background-color: var(--background-dark);
+      color: var(--text-light); font-size: 1em;
+      font-family: 'Roboto', sans-serif;
+    }
+    .reservation-form input:focus,
+    .reservation-form select:focus {
+      outline: none; border-color: var(--primary-orange);
+      box-shadow: 0 0 5px var(--primary-orange-glow);
+    }
+    .reservation-form button {
+      background-color: var(--primary-orange);
+      color: var(--background-dark); border: none;
+      padding: 1em 2em; border-radius: 4px;
+      font-family: 'Oswald', sans-serif; font-size: 1.2em;
+      text-transform: uppercase; cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .reservation-form button:hover {
+      background-color: #ff8c4a;
+      transform: translateY(-2px);
+    }
+    /* --- Fine Sezione Prenota --- */
+
+
     .container { max-width: 1200px; margin: 0 auto; padding: 2em 20px; }
     .category-accordion {
       margin-bottom: 2em;
@@ -164,7 +237,7 @@
       .hero { min-height: 50vh; }
       .logo-img { max-width: 200px; }
       .hero .subtitle {font-size: 1.1em;}
-      .category-title { font-size: 1.8em; }
+      .category-title, .reservation-title { font-size: 1.8em; }
       .nav-links a { font-size: 0.8em; padding: 1em 0.5em; }
       .menu-grid { grid-template-columns: 1fr; }
     }
@@ -174,6 +247,7 @@
 
 <nav class="navbar">
   <ul class="nav-links">
+    <li><a href="#prenota">Prenota</a></li>
     <li><a href="#stuzzicheria">Stuzzicheria</a></li>
     <li><a href="#panini">Panini</a></li>
     <li><a href="#pinse">Pinse</a></li>
@@ -188,6 +262,38 @@
   <img src="logo.png" alt="Logo PUB MÉDOC Railway Pub" class="logo-img">
   <p class="subtitle">Birreria • Pinseria • Paninoteca</p>
 </header>
+
+<div class="reservation-wrapper">
+  <div id="prenota" class="category-accordion is-visible">
+    <h2 class="reservation-title">Prenota un tavolo</h2>
+    <div class="reservation-content-wrapper">
+      <div class="reservation-container">
+        <form id="reservationForm" class="reservation-form">
+          <input type="text" id="resName" placeholder="Nome" required>
+          <input type="date" id="resDate" required>
+          <select id="resTime" required>
+            <option value="" disabled>Seleziona Orario (18:00 - 00:00)</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30">20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+            <option value="22:00">22:00</option>
+            <option value="22:30">22:30</option>
+            <option value="23:00">23:00</option>
+            <option value="23:30">23:30</option>
+            <option value="00:00">00:00</option>
+          </select>
+          <input type="number" id="resGuests" placeholder="Numero di Persone" min="1" max="20" required>
+          <button type="submit">Invia Richiesta di Prenotazione su WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <main class="container">
 
@@ -263,6 +369,7 @@
         <div class="menu-item"><div class="item-header"><h3 class="item-name">Hamburger di Scottona (200g) con Patate Fritte</h3><span class="item-price">€10</span></div></div>
         <div class="menu-item"><div class="item-header"><h3 class="item-name">Tagliata di Scottona</h3><span class="item-price">€18</span></div><p class="item-description">Sale nero e rosmarino</p></div>
         <div class="menu-item"><div class="item-header"><h3 class="item-name">Tagliata di Scottona</h3><span class="item-price">€18</span></div><p class="item-description">Rucola e grana</p></div>
+      </div>
     </div>
   </div>
 
@@ -325,7 +432,27 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
-    const sections = document.querySelectorAll('.category-accordion');
+    // Funzione per gestire l'apertura/chiusura degli accordion
+    function toggleAccordion(titleElement) {
+      titleElement.classList.toggle('active');
+      const content = titleElement.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        content.style.paddingTop = null;
+        content.style.paddingBottom = null; // Aggiustamento padding per chiusura
+      } else {
+        // Aggiustamento per la sezione prenotazione (non ha padding-top nel CSS)
+        if (titleElement.classList.contains('reservation-title')) {
+          content.style.maxHeight = content.scrollHeight + 32 + "px"; // 32px per il padding verticale del form nel wrapper
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.paddingTop = "1.5em";
+        }
+      }
+    }
+
+    // Funzionalità per l'osservatore dell'intersezione (per l'animazione delle categorie menu)
+    const sections = document.querySelectorAll('.category-accordion:not(#prenota)');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -337,27 +464,29 @@
     sections.forEach(section => { observer.observe(section); });
 
 
+    // Funzionalità per gli accordion (Categorie Menu)
     const accordionTitles = document.querySelectorAll('.category-title');
     accordionTitles.forEach(title => {
       title.addEventListener('click', function() {
-        this.classList.toggle('active');
-        const content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-          content.style.maxHeight = null;
-          content.style.paddingTop = null;
-        } else {
-          content.style.maxHeight = content.scrollHeight + "px";
-          content.style.paddingTop = "1.5em";
-        }
+        toggleAccordion(this);
       });
     });
 
+    // Funzionalità per l'accordion (Prenotazione)
+    const reservationTitle = document.querySelector('.reservation-title');
+    reservationTitle.addEventListener('click', function() {
+      toggleAccordion(this);
+    });
+
+    // Imposta la prenotazione inizialmente chiusa
+    reservationTitle.classList.remove('active');
+
+
+    // Funzionalità per la Modale (non usata nel menu, ma lasciata per completezza)
     const modal = document.getElementById("itemModal");
-    const trigger = document.getElementById("russellCroweTrigger");
     const closeBtn = document.querySelector(".modal-close");
 
-    if (modal && trigger && closeBtn) {
-      trigger.onclick = () => { modal.style.display = "flex"; }
+    if (modal && closeBtn) {
       closeBtn.onclick = () => { modal.style.display = "none"; }
       window.onclick = (event) => {
         if (event.target == modal) {
@@ -365,6 +494,51 @@
         }
       }
     }
+
+    // --- LOGICA DI PRENOTAZIONE WHATSAPP ---
+
+    const form = document.getElementById('reservationForm');
+    const resDateInput = document.getElementById('resDate');
+    const resTimeSelect = document.getElementById('resTime');
+
+    // 1. Imposta Data Corrente
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    resDateInput.value = `${yyyy}-${mm}-${dd}`;
+
+    // 2. Imposta Orario Predefinito
+    resTimeSelect.value = '20:30';
+
+    // Numero di telefono del locale
+    const phoneNumber = '3780919110';
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('resName').value.trim();
+      const date = resDateInput.value;
+      const time = resTimeSelect.value;
+      const guests = document.getElementById('resGuests').value;
+
+      // Formatta la data per il messaggio
+      const dateFormatted = new Date(date).toLocaleDateString('it-IT', { weekday: 'long', day: '2-digit', month: 'long' });
+
+      // Prepara il messaggio per WhatsApp
+      const whatsappText = `Ciao PUB MÉDOC! Vorrei riservare un tavolo a nome ${name}, il ${dateFormatted} alle ${time} per ${guests} persona/e. Attendo conferma. Grazie mille!`;
+
+      // Codifica il messaggio per l'URL
+      const encodedMessage = encodeURIComponent(whatsappText);
+
+      // Genera il link di WhatsApp e lo apre in una nuova finestra
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+
+      // OPTIONAL: Chiudi l'accordion dopo l'invio (simulato)
+      toggleAccordion(reservationTitle);
+    });
+    // --- FINE LOGICA DI PRENOTAZIONE WHATSAPP ---
   });
 </script>
 
