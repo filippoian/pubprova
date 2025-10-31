@@ -26,15 +26,29 @@
       color: var(--text-light);
     }
 
+    /* --- Navbar --- */
     .navbar {
       background-color: rgba(18, 18, 18, 0.85);
       backdrop-filter: blur(10px);
       position: sticky; top: 0; z-index: 1000;
       border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Oswald', sans-serif;
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1.5em;
+      text-transform: uppercase;
     }
     .nav-links {
-      list-style: none; margin: 0 auto; padding: 0;
-      display: flex; flex-wrap: wrap; justify-content: center; max-width: 1200px;
+      list-style: none; margin: 0; padding: 0;
+      display: flex;
     }
     .nav-links a {
       position: relative; display: block; padding: 1.1em 1.2em;
@@ -50,88 +64,162 @@
     }
     .nav-links a:hover::after { transform: scaleX(0.8); }
 
+    /* --- Hamburger Menu (Mobile) --- */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger .bar {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-light);
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+
     .hero {
       display: flex; flex-direction: column; justify-content: center;
-      align-items: center; min-height: 60vh; text-align: center; padding: 2em;
+      align-items: center;
+      min-height: 50vh;
+      text-align: center; padding: 2em;
       background: linear-gradient(180deg, rgba(18,18,18,0.4) 0%, #121212 100%), radial-gradient(circle at 50% 30%, #2a2a2a 0%, #121212 80%);
     }
     .logo-img { max-width: 350px; height: auto; }
     .hero .subtitle {
       font-family: 'Oswald', sans-serif; font-size: 1.4em; color: var(--text-secondary);
-      text-transform: uppercase; letter-spacing: 3px; margin-top: 1em;
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-top: 0.5em;
     }
 
-    /* --- Sezione Prenota (Adesso usa gli stili dell'Accordion) --- */
-    .reservation-wrapper {
-      max-width: 1200px; margin: 0 auto; padding: 2em 20px;
-    }
-    #prenota {
-      background-color: var(--background-dark); /* Reset dello sfondo per l'accordion */
-      margin-bottom: 2em;
-      opacity: 1; /* Deve essere sempre visibile per la prenotazione */
-      transform: translateY(0);
-      transition: none; /* Rimuoviamo l'animazione all'ingresso se è la prima sezione */
+    /* --- Sezione Prenota --- */
+    .reservation-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3em 20px 1em 20px;
     }
 
-    .reservation-title {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color); border-radius: 8px;
-      font-family: 'Oswald', sans-serif; font-size: 2.2em;
-      color: var(--primary-orange); padding: 0.7em 2em;
-      text-transform: uppercase; cursor: pointer; position: relative;
-      user-select: none; transition: background-color 0.3s;
+    .reservation-cta-button {
+      background: linear-gradient(145deg, var(--primary-orange), #c85f23);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8em;
+      text-align: center;
+      padding: 0.8em 1em;
+      border-radius: 8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      border: 1px solid #e46f2c;
+      margin-bottom: 1.5em;
     }
-    .reservation-title:hover { background-color: #222; }
-    .reservation-title::after {
-      content: '+'; font-size: 1.5em; position: absolute; right: 25px; top: 50%;
-      transform: translateY(-50%); transition: transform 0.4s ease;
+    .reservation-cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 15px var(--primary-orange-glow);
+      background: linear-gradient(145deg, #ff8c4a, #e46f2c);
     }
-    .reservation-title.active::after { transform: translateY(-50%) rotate(45deg); }
 
     .reservation-content-wrapper {
       max-height: 0; overflow: hidden;
       transition: max-height 0.8s ease-in-out;
-      padding: 0 1em; /* Spazi laterali per il form */
     }
 
     .reservation-container {
-      max-width: 600px; margin: 2em auto; /* Centra il form all'interno del wrapper */
+      max-width: 600px; margin: 0 auto 2em auto;
       text-align: center;
     }
 
+    /* --- Stile Form Prenotazione --- */
     .reservation-form {
-      display: flex; flex-direction: column; gap: 1.5em;
-      padding: 1.5em;
-      background-color: var(--card-bg); /* Sfondo per il form */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5em 2em;
+      padding: 2.5em;
+      background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
+      text-align: left;
+    }
+
+    .form-title {
+      grid-column: 1 / -1;
+      font-family: 'Oswald', sans-serif;
+      color: var(--primary-orange);
+      font-size: 1.8em;
+      text-transform: uppercase;
+      margin: 0 0 0.5em 0;
+      padding-bottom: 0.5em;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-family: 'Oswald', sans-serif;
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      text-transform: uppercase;
+      margin-bottom: 0.5em;
+      letter-spacing: 1px;
     }
 
     .reservation-form input,
     .reservation-form select {
-      padding: 1em; border: 1px solid var(--border-color);
-      border-radius: 4px; background-color: var(--background-dark);
-      color: var(--text-light); font-size: 1em;
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid var(--border-color);
+      color: var(--text-light);
+      font-size: 1.1em;
+      padding: 0.8em 0.2em;
+      border-radius: 0;
+      transition: border-color 0.3s;
       font-family: 'Roboto', sans-serif;
     }
+
+    .reservation-form input::placeholder {
+      color: #555;
+    }
+
     .reservation-form input:focus,
     .reservation-form select:focus {
-      outline: none; border-color: var(--primary-orange);
-      box-shadow: 0 0 5px var(--primary-orange-glow);
+      outline: none;
+      border-color: var(--primary-orange);
+      box-shadow: none;
     }
+
     .reservation-form button {
-      background-color: var(--primary-orange);
-      color: var(--background-dark); border: none;
-      padding: 1em 2em; border-radius: 4px;
-      font-family: 'Oswald', sans-serif; font-size: 1.2em;
-      text-transform: uppercase; cursor: pointer;
+      margin-top: 1em;
+      width: 100%;
+      background: var(--primary-orange);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 1em 2em;
+      border-radius: 4px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
     }
+
     .reservation-form button:hover {
       background-color: #ff8c4a;
       transform: translateY(-2px);
     }
-    /* --- Fine Sezione Prenota --- */
+    /* --- Fine Stile Form --- */
 
 
     .container { max-width: 1200px; margin: 0 auto; padding: 2em 20px; }
@@ -145,7 +233,7 @@
       background-color: var(--card-bg);
       border: 1px solid var(--border-color); border-radius: 8px;
       font-family: 'Oswald', sans-serif; font-size: 2.2em;
-      color: var(--primary-orange); padding: 0.7em 2em;
+      color: var(--primary-orange); padding: 0.7em 1em;
       text-transform: uppercase; cursor: pointer; position: relative;
       user-select: none; transition: background-color 0.3s;
     }
@@ -233,19 +321,72 @@
     }
     .contact-info p { color: var(--text-secondary); line-height: 1.7; margin: 0.3em 0; font-size: 0.9em; }
 
+    /* --- Media Queries for Responsiveness --- */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: rgba(18, 18, 18, 0.95);
+        backdrop-filter: blur(10px);
+        text-align: center;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        padding: 1.5em 1em;
+        border-top: 1px solid var(--border-color);
+      }
+      .hamburger {
+        display: flex;
+      }
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+
     @media (max-width: 768px) {
-      .hero { min-height: 50vh; }
-      .logo-img { max-width: 200px; }
+      .hero { min-height: 40vh; }
+      .logo-img { max-width: 250px; }
       .hero .subtitle {font-size: 1.1em;}
-      .category-title, .reservation-title { font-size: 1.8em; }
-      .nav-links a { font-size: 0.8em; padding: 1em 0.5em; }
+      .reservation-cta-button { font-size: 1.5em; }
+      .category-title { font-size: 1.6em; padding: 0.8em 1em; }
       .menu-grid { grid-template-columns: 1fr; }
+      .item-name, .item-price { font-size: 1.2em; }
+    }
+
+    @media (max-width: 600px) {
+      /* Rende il form a una colonna su schermi piccoli */
+      .reservation-form {
+        grid-template-columns: 1fr;
+        gap: 1.5em; /* Riduci il gap laterale quando è a colonna singola */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-img { max-width: 200px; }
+      .hero .subtitle { font-size: 1em; letter-spacing: 2px; }
+      .reservation-cta-button { font-size: 1.3em; }
+      .category-title { font-size: 1.4em; }
+      .reservation-form { padding: 1.5em; }
+      .menu-item { padding: 1em; }
     }
   </style>
 </head>
 <body>
 
 <nav class="navbar">
+  <a href="#" class="nav-logo">MÉDOC</a>
   <ul class="nav-links">
     <li><a href="#prenota">Prenota</a></li>
     <li><a href="#stuzzicheria">Stuzzicheria</a></li>
@@ -256,6 +397,11 @@
     <li><a href="#birre">Birre & Bar</a></li>
     <li><a href="#contatti">Contatti</a></li>
   </ul>
+  <div class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
 </nav>
 
 <header class="hero">
@@ -263,16 +409,27 @@
   <p class="subtitle">Birreria • Pinseria • Paninoteca</p>
 </header>
 
-<div class="reservation-wrapper">
-  <div id="prenota" class="category-accordion is-visible">
-    <h2 class="reservation-title">Prenota un tavolo</h2>
-    <div class="reservation-content-wrapper">
-      <div class="reservation-container">
-        <form id="reservationForm" class="reservation-form">
-          <input type="text" id="resName" placeholder="Nome" required>
+<div id="prenota" class="reservation-section">
+  <h2 class="reservation-cta-button">Prenota un tavolo</h2>
+  <div class="reservation-content-wrapper">
+    <div class="reservation-container">
+      <form id="reservationForm" class="reservation-form">
+        <h3 class="form-title">Dettagli Prenotazione</h3>
+
+        <div class="form-group full-width">
+          <label for="resName">Nome e Cognome</label>
+          <input type="text" id="resName" placeholder="Es. Mario Rossi" required>
+        </div>
+
+        <div class="form-group">
+          <label for="resDate">Data</label>
           <input type="date" id="resDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="resTime">Orario</label>
           <select id="resTime" required>
-            <option value="" disabled>Seleziona Orario (18:00 - 00:00)</option>
+            <option value="" disabled>Seleziona Orario</option>
             <option value="18:00">18:00</option>
             <option value="18:30">18:30</option>
             <option value="19:00">19:00</option>
@@ -287,10 +444,17 @@
             <option value="23:30">23:30</option>
             <option value="00:00">00:00</option>
           </select>
-          <input type="number" id="resGuests" placeholder="Numero di Persone" min="1" max="20" required>
-          <button type="submit">Invia Richiesta di Prenotazione su WhatsApp</button>
-        </form>
-      </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="resGuests">Numero di Persone</label>
+          <input type="number" id="resGuests" placeholder="Es. 4" min="1" max="20" required>
+        </div>
+
+        <div class="form-group full-width">
+          <button type="submit">Invia Richiesta su WhatsApp</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -414,6 +578,7 @@
     <p><strong>Indirizzo:</strong> Via Monfalcone, 10 - San Benedetto del Tronto (AP)</p>
     <p><strong>Orari:</strong> Lun-Dom: 18:00 - 02:00 </p>
     <p>Seguici sui Social: <strong>@pub_medoc</strong></p>
+    <p>P.IVA: 02574390445</p>
   </div>
 </footer>
 
@@ -432,19 +597,48 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
-    // Funzione per gestire l'apertura/chiusura degli accordion
+    // --- Hamburger Menu Logic ---
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinkItems = document.querySelectorAll('.nav-links a');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinkItems.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        }
+      });
+    });
+
+    // --- CORREZIONE LOGICA ACCORDION ---
     function toggleAccordion(titleElement) {
       titleElement.classList.toggle('active');
       const content = titleElement.nextElementSibling;
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
         content.style.paddingTop = null;
-        content.style.paddingBottom = null; // Aggiustamento padding per chiusura
+        content.style.paddingBottom = null;
       } else {
-        // Aggiustamento per la sezione prenotazione (non ha padding-top nel CSS)
-        if (titleElement.classList.contains('reservation-title')) {
-          content.style.maxHeight = content.scrollHeight + 32 + "px"; // 32px per il padding verticale del form nel wrapper
+        // Logica differenziata
+        if (titleElement.classList.contains('reservation-cta-button')) {
+          // Calcolo specifico per il form di prenotazione
+          const container = content.querySelector('.reservation-container');
+          if (container) {
+            const containerStyle = window.getComputedStyle(container);
+            const marginBottom = parseFloat(containerStyle.marginBottom);
+            content.style.maxHeight = (content.scrollHeight + marginBottom) + "px";
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
         } else {
+          // Logica generica per le categorie del menu
           content.style.maxHeight = content.scrollHeight + "px";
           content.style.paddingTop = "1.5em";
         }
@@ -452,7 +646,7 @@
     }
 
     // Funzionalità per l'osservatore dell'intersezione (per l'animazione delle categorie menu)
-    const sections = document.querySelectorAll('.category-accordion:not(#prenota)');
+    const sections = document.querySelectorAll('.category-accordion');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -472,14 +666,14 @@
       });
     });
 
-    // Funzionalità per l'accordion (Prenotazione)
-    const reservationTitle = document.querySelector('.reservation-title');
-    reservationTitle.addEventListener('click', function() {
+    // Funzionalità per il nuovo pulsante di prenotazione
+    const reservationButton = document.querySelector('.reservation-cta-button');
+    reservationButton.addEventListener('click', function() {
       toggleAccordion(this);
     });
 
     // Imposta la prenotazione inizialmente chiusa
-    reservationTitle.classList.remove('active');
+    reservationButton.classList.remove('active');
 
 
     // Funzionalità per la Modale (non usata nel menu, ma lasciata per completezza)
@@ -512,7 +706,7 @@
     resTimeSelect.value = '20:30';
 
     // Numero di telefono del locale
-    const phoneNumber = '3780919110';
+    const phoneNumber = '393780919110';
 
     form.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -536,7 +730,7 @@
       window.open(whatsappURL, '_blank');
 
       // OPTIONAL: Chiudi l'accordion dopo l'invio (simulato)
-      toggleAccordion(reservationTitle);
+      toggleAccordion(reservationButton);
     });
     // --- FINE LOGICA DI PRENOTAZIONE WHATSAPP ---
   });
