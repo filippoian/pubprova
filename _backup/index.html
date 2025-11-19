@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PUB MÉDOC | Birreria, Pinseria e Paninoteca a San Benedetto del Tronto</title>
+
+  <meta name="description" content="Menu ufficiale del Pub Médoc a San Benedetto del Tronto. Gusta le nostre Pinse Romane, Hamburger Gourmet, Stuzzicheria e Birre. Prenota il tuo tavolo online!">
+
+  <meta name="keywords" content="Pub San Benedetto del Tronto, Pinsa Romana, Hamburgeria, Birreria, Aperitivo, Menu Médoc, Via Monfalcone">
+
+  <meta name="author" content="PUB MÉDOC">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:site_name" content="PUB MÉDOC">
+  <meta property="og:title" content="Menu PUB MÉDOC - San Benedetto del Tronto">
+  <meta property="og:description" content="Sfoglia il menu: Pinse, Hamburger '90 Min', Stuzzicheria e Birre. Prenota ora su WhatsApp!">
+  <meta property="og:type" content="restaurant.menu">
+  <meta property="og:url" content="https://www.pubmedocmenu.com"> <meta property="og:image" content="https://www.pubmedocmenu.com/logo.png"> <meta property="og:locale" content="it_IT">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "PUB MÉDOC",
+      "image": "https://www.pubmedocmenu.com/logo.png",
+      "@id": "https://www.pubmedocmenu.com",
+      "url": "https://www.pubmedocmenu.com",
+      "telephone": "+393780919110",
+      "menu": "https://www.pubmedocmenu.com",
+      "servesCuisine": ["Italian", "Pub Food", "Pinsa", "Hamburger"],
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Monfalcone, 10",
+        "addressLocality": "San Benedetto del Tronto",
+        "addressRegion": "AP",
+        "postalCode": "63074",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 42.9478,
+        "longitude": 13.8830
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "18:00",
+        "closes": "02:00"
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+    :root {
+      --background-dark: #121212;
+      --primary-orange: #e46f2c;
+      --primary-orange-glow: rgba(228, 111, 44, 0.4);
+      --text-light: #f5f5f5;
+      --text-secondary: #b0b0b0;
+      --card-bg: #1a1a1a;
+      --border-color: #2c2c2c;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+    }
+
+    /* --- Navbar --- */
+    .navbar {
+      background-color: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Oswald', sans-serif;
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1.5em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      list-style: none; margin: 0; padding: 0;
+      display: flex;
+    }
+    .nav-links a {
+      position: relative; display: block; padding: 1.1em 1.2em;
+      text-decoration: none; color: var(--text-light);
+      font-family: 'Oswald', sans-serif; text-transform: uppercase;
+      letter-spacing: 1.5px; font-size: 0.9em; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--primary-orange); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px; background-color: var(--primary-orange);
+      transform: scaleX(0); transform-origin: center; transition: transform 0.4s ease;
+    }
+    .nav-links a:hover::after { transform: scaleX(0.8); }
+
+    /* --- Hamburger Menu (Mobile) --- */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger .bar {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-light);
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+
+    .hero {
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: center;
+      min-height: 50vh;
+      text-align: center; padding: 2em;
+      background: linear-gradient(180deg, rgba(18,18,18,0.4) 0%, #121212 100%), radial-gradient(circle at 50% 30%, #2a2a2a 0%, #121212 80%);
+    }
+    .logo-img { max-width: 350px; height: auto; }
+    .hero .subtitle {
+      font-family: 'Oswald', sans-serif; font-size: 1.4em; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-top: 0.5em;
+    }
+
+    /* --- Sezione Prenota --- */
+    .reservation-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3em 20px 1em 20px;
+    }
+
+    .reservation-cta-button {
+      background: linear-gradient(145deg, var(--primary-orange), #c85f23);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8em;
+      text-align: center;
+      padding: 0.8em 1em;
+      border-radius: 8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      border: 1px solid #e46f2c;
+      margin-bottom: 1.5em;
+    }
+    .reservation-cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 15px var(--primary-orange-glow);
+      background: linear-gradient(145deg, #ff8c4a, #e46f2c);
+    }
+
+    .reservation-content-wrapper {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.8s ease-in-out;
+    }
+
+    .reservation-container {
+      max-width: 600px; margin: 0 auto 2em auto;
+      text-align: center;
+    }
+
+    /* --- Stile Form Prenotazione --- */
+    .reservation-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5em 2em;
+      padding: 2.5em;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .form-title {
+      grid-column: 1 / -1;
+      font-family: 'Oswald', sans-serif;
+      color: var(--primary-orange);
+      font-size: 1.8em;
+      text-transform: uppercase;
+      margin: 0 0 0.5em 0;
+      padding-bottom: 0.5em;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-family: 'Oswald', sans-serif;
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      text-transform: uppercase;
+      margin-bottom: 0.5em;
+      letter-spacing: 1px;
+    }
+
+    .reservation-form input,
+    .reservation-form select {
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid var(--border-color);
+      color: var(--text-light);
+      font-size: 1.1em;
+      padding: 0.8em 0.2em;
+      border-radius: 0;
+      transition: border-color 0.3s;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .reservation-form input::placeholder {
+      color: #555;
+    }
+
+    .reservation-form input:focus,
+    .reservation-form select:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+      box-shadow: none;
+    }
+
+    .reservation-form button {
+      margin-top: 1em;
+      width: 100%;
+      background: var(--primary-orange);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 1em 2em;
+      border-radius: 4px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .reservation-form button:hover {
+      background-color: #ff8c4a;
+      transform: translateY(-2px);
+    }
+    /* --- Fine Stile Form --- */
+
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 2em 20px; }
+    .category-accordion {
+      margin-bottom: 2em;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .category-accordion.is-visible { opacity: 1; transform: translateY(0); }
+    .category-title {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color); border-radius: 8px;
+      font-family: 'Oswald', sans-serif; font-size: 2.2em;
+      color: var(--primary-orange); padding: 0.7em 1em;
+      text-transform: uppercase; cursor: pointer; position: relative;
+      user-select: none; transition: background-color 0.3s;
+    }
+    .category-title:hover { background-color: #222; }
+    .category-title::after {
+      content: '+'; font-size: 1.5em; position: absolute; right: 25px; top: 50%;
+      transform: translateY(-50%); transition: transform 0.4s ease;
+    }
+    .category-title.active::after { transform: translateY(-50%) rotate(45deg); }
+    .menu-content-wrapper {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.8s ease-in-out, padding-top 0.5s ease-in-out;
+    }
+
+    /* --- Menu Grid & Items --- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1em; padding-top: 1.5em;
+    }
+    .menu-item {
+      background-color: var(--card-bg); padding: 1.5em;
+      border-radius: 8px; border: 1px solid var(--border-color);
+      display: flex; flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .menu-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-orange-glow);
+    }
+    .menu-item.is-clickable { cursor: pointer; }
+    .item-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+    .item-name {
+      font-family: 'Oswald', sans-serif; font-size: 1.4em;
+      font-weight: 700; color: var(--text-light); text-transform: uppercase;
+    }
+    .item-price {
+      font-family: 'Oswald', sans-serif; font-size: 1.4em;
+      font-weight: 400; color: var(--primary-orange); white-space: nowrap;
+    }
+    .item-description {
+      font-size: 0.9em; color: var(--text-secondary); font-weight: 300;
+      margin-top: 0.5em; line-height: 1.6;
+    }
+
+    .modal {
+      display: none; position: fixed; z-index: 2000;
+      left: 0; top: 0; width: 100%; height: 100%;
+      overflow: auto; background-color: rgba(0,0,0,0.8);
+      align-items: center; justify-content: center;
+    }
+    .modal-content {
+      background-color: var(--card-bg); margin: auto; padding: 2em;
+      border: 1px solid var(--border-color); border-radius: 8px;
+      width: 90%; max-width: 500px; position: relative;
+      animation: fadeIn 0.5s;
+    }
+    .modal-close {
+      color: #aaa; position: absolute; top: 10px; right: 25px;
+      font-size: 28px; font-weight: bold; cursor: pointer;
+    }
+    .modal-close:hover, .modal-close:focus { color: var(--primary-orange); }
+    .modal-img { width: 100%; height: auto; border-radius: 6px; margin-bottom: 1em; }
+    @keyframes fadeIn { from {opacity: 0; transform: scale(0.95);} to {opacity: 1; transform: scale(1);} }
+
+    /* --- Footer & Coperto --- */
+    .coperto-section { text-align: center; margin-top: 4em; }
+    .coperto-text {
+      display: inline-block;
+      padding: 0.5em 1.5em;
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      border-radius: 6px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1em;
+      color: var(--text-secondary);
+    }
+    footer {
+      text-align: center; padding: 2.5em 2em 3em 2em; background-color: #0c0c0c;
+      margin-top: 1.5em; border-top: 1px solid var(--border-color);
+    }
+    .footer-title {
+      font-family: 'Oswald', sans-serif; font-size: 1.8em;
+      color: var(--primary-orange); text-transform: uppercase; margin: 0 0 1em 0;
+    }
+    .contact-info p { color: var(--text-secondary); line-height: 1.7; margin: 0.3em 0; font-size: 0.9em; }
+
+    /* --- Media Queries for Responsiveness --- */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: rgba(18, 18, 18, 0.95);
+        backdrop-filter: blur(10px);
+        text-align: center;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        padding: 1.5em 1em;
+        border-top: 1px solid var(--border-color);
+      }
+      .hamburger {
+        display: flex;
+      }
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero { min-height: 40vh; }
+      .logo-img { max-width: 250px; }
+      .hero .subtitle {font-size: 1.1em;}
+      .reservation-cta-button { font-size: 1.5em; }
+      .category-title { font-size: 1.6em; padding: 0.8em 1em; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .item-name, .item-price { font-size: 1.2em; }
+    }
+
+    @media (max-width: 600px) {
+      /* Rende il form a una colonna su schermi piccoli */
+      .reservation-form {
+        grid-template-columns: 1fr;
+        gap: 1.5em; /* Riduci il gap laterale quando è a colonna singola */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-img { max-width: 200px; }
+      .hero .subtitle { font-size: 1em; letter-spacing: 2px; }
+      .reservation-cta-button { font-size: 1.3em; }
+      .category-title { font-size: 1.4em; }
+      .reservation-form { padding: 1.5em; }
+      .menu-item { padding: 1em; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="#" class="nav-logo">MÉDOC</a>
+  <ul class="nav-links">
+    <li><a href="#prenota">Prenota</a></li>
+    <li><a href="#stuzzicheria">Stuzzicheria</a></li>
+    <li><a href="#panini">Panini</a></li>
+    <li><a href="#pinse">Pinse</a></li>
+    <li><a href="#specialita">Specialità</a></li>
+    <li><a href="#dolci">Dolci</a></li>
+    <li><a href="#birre">Birre & Bar</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+  <div class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+</nav>
+
+<header class="hero">
+  <img src="logo.png" alt="Logo PUB MÉDOC Railway Pub" class="logo-img">
+  <p class="subtitle">Birreria • Pinseria • Paninoteca</p>
+</header>
+<div id="prenota" class="reservation-section">
+  <h2 class="reservation-cta-button">Prenota un tavolo</h2>
+  <div class="reservation-content-wrapper">
+    <div class="reservation-container">
+      <form id="reservationForm" class="reservation-form">
+        <h3 class="form-title">Dettagli Prenotazione</h3>
+
+        <div class="form-group full-width">
+          <label for="resName">Nome</label>
+          <input type="text" id="resName" placeholder="" required>
+        </div>
+
+        <div class="form-group">
+          <label for="resDate">Data</label>
+          <input type="date" id="resDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="resTime">Orario</label>
+          <select id="resTime" required>
+            <option value="" disabled>Seleziona Orario</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30">20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+            <option value="22:00">22:00</option>
+            <option value="22:30">22:30</option>
+            <option value="23:00">23:00</option>
+            <option value="23:30">23:30</option>
+            <option value="00:00">00:00</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="resGuests">Numero di Persone</label>
+          <input type="number" id="resGuests" placeholder="" min="1" max="20" required>
+        </div>
+
+        <div class="form-group full-width">
+          <button type="submit">Invia Richiesta su WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div id="stuzzicheria" class="category-accordion">
+    <h2 class="category-title">Stuzzicheria</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Patate Fritte</h3><span class="item-price">€5</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Patate Fritte Cheddar & Bacon</h3><span class="item-price">€7</span></div><p class="item-description">Patate fritte con salsa cheddar e bacon croccante</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Olive Ascolane</h3><span class="item-price">€8</span></div><p class="item-description">8 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Anelli di Cipolla</h3><span class="item-price">€5</span></div><p class="item-description">8 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Bocconcini di Pulled Pork</h3><span class="item-price">€7</span></div><p class="item-description">Bocconcini di Pulled Pork serviti con salsa bbq 6 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Bocconcini di Pollo</h3><span class="item-price">€5</span></div><p class="item-description">8 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Jalapeños</h3><span class="item-price">€7</span></div><p class="item-description">6 pezzi</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Zucchine Fritte</h3><span class="item-price">€6</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Fritto Misto</h3><span class="item-price">€8</span></div><p class="item-description">Patate fritte, 2 pz. olive ascolane, 2 pz. bocconcini di pollo, 2 pz. anelli di cipolla, 2 pz. jalapeños</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panini" class="category-accordion">
+    <h2 class="category-title">Panini</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">90 Min</h3><span class="item-price">€10</span></div><p class="item-description">Hamburger di Scottona 200g, lattuga, pomodoro, cheddar, bacon</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">L'Alba</h3><span class="item-price">€12,5</span></div><p class="item-description">Hamburger di Scottona 200g, carbo crema, pecorino grigliato, guanciale croccante</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">1984</h3><span class="item-price">€11</span></div><p class="item-description">Pulled Pork, coleslaw, salsa bbq</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Daytona</h3><span class="item-price">€9</span></div><p class="item-description">Burger di pollo croccante, lattuga, pomodoro, salsa all'erbette</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">La Chiave</h3><span class="item-price">€13</span></div><p class="item-description">Pastrami, lattuga, burrata, cipolla rossa caramellata, salsa tartara</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Flop</h3><span class="item-price">€10</span></div><p class="item-description">Burger vegetale, lattuga, pomodoro, cheddar</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Marla</h3><span class="item-price">€11</span></div><p class="item-description">Hamburger di Scottona 200g, mortadella grigliata, burrata, pesto di pistacchio</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Tiè</h3><span class="item-price">€9</span></div><p class="item-description">Würstel, cipolla crispy, bacon, cheddar</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pinse" class="category-accordion">
+    <h2 class="category-title">Pinse Rosse</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Lunedì</h3><span class="item-price">€10</span></div><p class="item-description">Pomodoro, bufala, basilico</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Giuda</h3><span class="item-price">€9</span></div><p class="item-description">Pomodoro, mozzarella, verdure grigliate miste</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">La Prima Volta</h3><span class="item-price">€10</span></div><p class="item-description">Pomodoro, stracciatella, pomodorini gialli confit</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Kumitè</h3><span class="item-price">€9</span></div><p class="item-description">Pomodoro, mozzarella, mais, prosciutto cotto</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Machete</h3><span class="item-price">€12</span></div><p class="item-description">Pomodoro, mozzarella, salame piccante, salsiccia, pecorino grattugiato</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hellvisback</h3><span class="item-price">€12</span></div><p class="item-description">Pomodoro, mozarella, salsiccia, porcini</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-accordion">
+    <h2 class="category-title">Pinse Bianche</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">S.A.L.M.O</h3><span class="item-price">€14</span></div><p class="item-description">Stracciatella, mortadella, pesto di pistacchio, tartufo grattugiato</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Titi</h3><span class="item-price">€9</span></div><p class="item-description">Mozzarella, pomodorini gialli confit, mais</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Mauri</h3><span class="item-price">€14</span></div><p class="item-description">Pastrami, stracciatella, pomodorini gialli confit</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Perdonami</h3><span class="item-price">€9,5</span></div><p class="item-description">Mozzarella, tonno, cipolla rossa caramellata</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Russell Crowe</h3><span class="item-price">€10</span></div><p class="item-description">Mozzarella, salsiccia, friarielli</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Miracolo</h3><span class="item-price">€13</span></div><p class="item-description">Rucola, pomodorini, prosciutto crudo, scaglie di Grana, glassa di aceto balsamico</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Respira</h3><span class="item-price">€12</span></div><p class="item-description">Mozzarella, crema di pecorino, guanciale a crudo, carbo-crema</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="specialita" class="category-accordion">
+    <h2 class="category-title">Specialità della Casa</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Insalatona Yoko-Ono</h3><span class="item-price">€13</span></div><p class="item-description">Pollo fritto, lattuga, pomodorini, mais, mozzarella, crostini di pane</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Insalatona Cabriolet</h3><span class="item-price">€13</span></div><p class="item-description">Tonno, lattuga, pomodorini, mais, scaglie di grana, crostini di pane</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Cotoletta con Patate Fritte</h3><span class="item-price">€10</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hamburger di Scottona (200g) con Patate Fritte</h3><span class="item-price">€10</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Tagliata di Scottona</h3><span class="item-price">€18</span></div><p class="item-description">Sale nero e rosmarino</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Tagliata di Scottona</h3><span class="item-price">€18</span></div><p class="item-description">Rucola e grana</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dolci" class="category-accordion">
+    <h2 class="category-title">Dolci</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Pinsa Dolce</h3><span class="item-price">€10</span></div><p class="item-description">Nutella, cioccolato bianco, granella di nocciole</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Dolce della Casa</h3><span class="item-price">€5</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Birramisù</h3><span class="item-price">€5</span></div><p class="item-description">Rivisitazione del classico tiramisù, arricchito da una delicata nota di birra</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="birre" class="category-accordion">
+    <h2 class="category-title">Birre & Bar</h2>
+    <div class="menu-content-wrapper">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hirter Marzen 5,0%</h3><span class="item-price">€4 / €6</span></div><p class="item-description">0.3cl / 0.5cl - Lager, Austria</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Hoegaarden 4,8%</h3><span class="item-price">€4 / €6</span></div><p class="item-description">0.25cl / 0.5cl - Blanche, Belgio</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Mezzopasso IPA 5,9%</h3><span class="item-price">€4,5 / €6,5</span></div><p class="item-description">0.25cl / 0.4cl - IPA, Italia</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Leffe Rossa 6,6%</h3><span class="item-price">€4,5 / €6,5</span></div><p class="item-description">0.25cl / 0.4cl - Rossa, Belgio</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Pepsi alla Spina</h3><span class="item-price">€3 / €5</span></div><p class="item-description">0.3cl / 0.5cl</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Bevande in Vetro 0,33cl</h3><span class="item-price">€3</span></div><p class="item-description">Pepsi / Pepsi Max / 7 Up / Lipton Iced Tea / Oransoda</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Acqua</h3><span class="item-price">€1 / €2</span></div><p class="item-description">0,5L / 1L</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Vino</h3><span class="item-price">SQ</span></div><p class="item-description">Al calice o in bottiglia</p></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Amari</h3><span class="item-price">€3</span></div></div>
+        <div class="menu-item"><div class="item-header"><h3 class="item-name">Caffè</h3><span class="item-price">€1,5</span></div></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="coperto-section">
+  <p class="coperto-text">COPERTO €2</p>
+</div>
+
+<footer id="contatti">
+  <h2 class="footer-title">Vieni a trovarci</h2>
+  <div class="contact-info">
+    <p><strong>Indirizzo:</strong> Via Monfalcone, 10 - San Benedetto del Tronto (AP)</p>
+    <p><strong>Orari:</strong> Lun-Dom: 18:00 - 02:00 </p>
+    <p>Seguici sui Social: <strong>@pub_medoc</strong></p>
+    <p>P.IVA: 02574390445</p>
+  </div>
+</footer>
+
+<div id="itemModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <img src="https://i.imgur.com/gK9fg2p.jpeg" alt="Pinsa Russell Crowe" class="modal-img">
+    <div class="item-header">
+      <h3 class="item-name">Russell Crowe</h3>
+      <span class="item-price">€10</span>
+    </div>
+    <p class="item-description">La nostra celebre pinsa con una base di mozzarella fior di latte, arricchita con salsiccia artigianale e friarielli saltati in padella con aglio e peperoncino.</p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // --- Hamburger Menu Logic ---
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinkItems = document.querySelectorAll('.nav-links a');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinkItems.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+        }
+      });
+    });
+
+    // --- CORREZIONE LOGICA ACCORDION ---
+    function toggleAccordion(titleElement) {
+      titleElement.classList.toggle('active');
+      const content = titleElement.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        content.style.paddingTop = null;
+        content.style.paddingBottom = null;
+      } else {
+        // Logica differenziata
+        if (titleElement.classList.contains('reservation-cta-button')) {
+          // Calcolo specifico per il form di prenotazione
+          const container = content.querySelector('.reservation-container');
+          if (container) {
+            const containerStyle = window.getComputedStyle(container);
+            const marginBottom = parseFloat(containerStyle.marginBottom);
+            content.style.maxHeight = (content.scrollHeight + marginBottom) + "px";
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        } else {
+          // Logica generica per le categorie del menu
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.paddingTop = "1.5em";
+        }
+      }
+    }
+
+    // Funzionalità per l'osservatore dell'intersezione (per l'animazione delle categorie menu)
+    const sections = document.querySelectorAll('.category-accordion');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    sections.forEach(section => { observer.observe(section); });
+
+
+    // Funzionalità per gli accordion (Categorie Menu)
+    const accordionTitles = document.querySelectorAll('.category-title');
+    accordionTitles.forEach(title => {
+      title.addEventListener('click', function() {
+        toggleAccordion(this);
+      });
+    });
+
+    // Funzionalità per il nuovo pulsante di prenotazione
+    const reservationButton = document.querySelector('.reservation-cta-button');
+    reservationButton.addEventListener('click', function() {
+      toggleAccordion(this);
+    });
+
+    // Imposta la prenotazione inizialmente chiusa
+    reservationButton.classList.remove('active');
+
+
+    // Funzionalità per la Modale (non usata nel menu, ma lasciata per completezza)
+    const modal = document.getElementById("itemModal");
+    const closeBtn = document.querySelector(".modal-close");
+
+    if (modal && closeBtn) {
+      closeBtn.onclick = () => { modal.style.display = "none"; }
+      window.onclick = (event) => {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
+
+    // --- LOGICA DI PRENOTAZIONE WHATSAPP ---
+
+    const form = document.getElementById('reservationForm');
+    const resDateInput = document.getElementById('resDate');
+    const resTimeSelect = document.getElementById('resTime');
+
+    // 1. Imposta Data Corrente
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    resDateInput.value = `${yyyy}-${mm}-${dd}`;
+
+    // 2. Imposta Orario Predefinito
+    resTimeSelect.value = '20:30';
+
+    // Numero di telefono del locale
+    const phoneNumber = '393780919110';
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('resName').value.trim();
+      const date = resDateInput.value;
+      const time = resTimeSelect.value;
+      const guests = document.getElementById('resGuests').value;
+
+      // Formatta la data per il messaggio
+      const dateFormatted = new Date(date).toLocaleDateString('it-IT', { weekday: 'long', day: '2-digit', month: 'long' });
+
+      // Prepara il messaggio per WhatsApp
+      const whatsappText = `Ciao PUB MÉDOC! Vorrei riservare un tavolo a nome ${name}, il ${dateFormatted} alle ${time} per ${guests} persona/e. Attendo conferma. Grazie mille!`;
+
+      // Codifica il messaggio per l'URL
+      const encodedMessage = encodeURIComponent(whatsappText);
+
+      // Genera il link di WhatsApp e lo apre in una nuova finestra
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+
+      // OPTIONAL: Chiudi l'accordion dopo l'invio (simulato)
+      toggleAccordion(reservationButton);
+    });
+    // --- FINE LOGICA DI PRENOTAZIONE WHATSAPP ---
+  });
+</script>
+
+</body>
+</html>

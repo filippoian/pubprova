@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Nunito:wght@400;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #FF6B35;
+  --color-secondary: #004E89;
+  /* Strong Blue */
+  --color-bg: #F7F9FC;
+  /* Light Gray/White */
+  --color-card: #FFFFFF;
+  /* White */
+  --color-text: #1A202C;
+  /* Dark Gray */
+  --color-text-muted: #718096;
+  /* Gray */
+  --color-border: #E2E8F0;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+
+  --shadow-sticker: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+:root {
+  /* Custom properties for usage in JS or other CSS if needed, 
+     though @theme makes them available as utilities like bg-primary */
+  --color-bg: #F28C28;
+  /* Orange from poster */
+  --color-card: #FFFFFF;
+  --color-primary: #FF6B35;
+  --color-secondary: #004E89;
+  --color-text: #1A202C;
+  --color-text-muted: #718096;
+  --color-border: #E2E8F0;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  background-image: url("data:image/svg+xml,%3Csvg width='600' height='200' viewBox='0 0 600 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='80' font-weight='bold' fill='%23000000' fill-opacity='0.02'%3EPUBMEDOC%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
