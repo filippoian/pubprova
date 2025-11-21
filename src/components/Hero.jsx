@@ -73,17 +73,7 @@ const Hero = () => {
                 </motion.div>
             </div>
 
-            {/* Sticker Train Element - Bottom Left */}
-            <motion.div
-                className="absolute bottom-10 left-5 md:left-20 z-20"
-                initial={{ rotate: -5, y: 20 }}
-                animate={{ rotate: 0, y: 0 }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-            >
-                <div className="bg-white p-2 rounded-2xl shadow-sticker transform rotate-3">
-                    <img src="/assets/element1.png" alt="Train" className="w-24 md:w-32 h-auto object-contain" />
-                </div>
-            </motion.div>
+
 
         </section>
     );
