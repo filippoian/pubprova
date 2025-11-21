@@ -33,18 +33,22 @@ const Header = () => {
     ];
 
     return (
-        <header className={`fixed w-full top-0 z-50 transition-all duration-300 bg-transparent py-5 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+        // MODIFICA 1: Rimosso 'py-1' per eliminare lo spazio interno verticale
+        <header className={`fixed w-full top-0 z-50 transition-all duration-300 bg-transparent ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="container mx-auto px-4 flex justify-between items-center">
-                <a href="#" className="flex items-center">
+                
+                {/* MODIFICA 2: Aggiunto '-mt-2' (margine negativo) per tirare il logo verso l'alto */}
+                <a href="#" className="flex items-center -mt-2">
                     <img
                         src="/pubmedoc-logo.png"
                         alt="PubMedoc Logo"
+                        // Dimensioni mantenute come richiesto
                         className="h-26 md:h-42 w-auto"
                     />
                 </a>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
+                <nav className="hidden md:flex items-center gap-6">
                     {navLinks.map((link) => (
                         <a
                             key={link.name}

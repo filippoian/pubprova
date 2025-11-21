@@ -118,7 +118,7 @@ const Info = () => {
                 </div>
 
             </div>
-        </section>
+        </section >
     );
 };
 

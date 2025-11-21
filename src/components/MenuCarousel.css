@@ -1,0 +1,23 @@
+/* Menu specific styles */
+.menu-swiper {
+    /* Kept for backward compatibility if needed, but currently unused */
+}
+
+/* Custom Scrollbar for any internal scrolling elements */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
